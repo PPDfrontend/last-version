@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: white; /* No background image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: black; /* Set font color to black */
+}
+
+/* Container for the whole login page */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login box */
+.login-container {
+  width: 480px;
+  padding: 35px;
+  background: rgba(255, 255, 255, 0.9); /* Solid white with slight transparency */
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; /* Optional: change font weight */
+  border: 1px solid #ccc;
+  margin: 0 auto;
+}
+
+/* Header and underline */
+.login-header h2 {
+  margin-bottom: 10px;
+}
+
+.login-underline {
+  width: 50px;
+  height: 3px;
+  background-color: #00A3A3;
+  margin: 0 auto 20px auto;
+  border-radius: 3px;
+}
+
+/* Label styling */
+.login-inputs label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  white-space: nowrap;
+  color: black;
+}
+
+/* Input fields */
+.login-inputs input[type="email"],
+.login-inputs input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: black;
+}
+
+/* Submit button */
+.login-submit button {
+  width: 60%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #00A3A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.login-submit button:hover {
+  background-color: #00A3A3;
+}
+
+/* Footer link */
+.login-footer {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-footer a {
+  color: #00A3A3;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* Align checkbox and text */
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+/* Forgot password link */
+.remember-forgot a {
+  text-decoration: none;
+  color: #00A3A3;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+

@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: white; /* No background image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: black; /* Set font color to black */
+}
+
+/* Container for the whole login page */
+.SignUp-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login box */
+.SignUp-container {
+  width: 1000px;
+  padding: 35px;
+  background: rgba(255, 255, 255, 0.9); /* Solid white with slight transparency */
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family:  'Roboto', sans-serif;
+  font-weight: 400; /* Optional: change font weight */
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  height: 520px;
+}
+
+/* Header and underline */
+.SignUp-header h2 {
+  margin-bottom: 10px;
+}
+
+.SignUp-underline {
+  width: 60px;
+  height: 3px;
+  background-color: #00A3A3;
+  margin: 0 auto 20px auto;
+  border-radius: 3px;
+}
+.SignUp-form {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+}
+.SignUp-right, .SignUp-left {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.SignUp-inputs label {
+  display: block;
+  text-align: left;
+  font-weight: 600; /* Bold */
+  font-size: 15px;  /* Bigger font */
+  color: #000;      /* Solid black for clarity */
+  margin-bottom: 4px; /* Close to input */
+}
+
+/* Input field styling */
+.SignUp-inputs input[type="text"],
+.SignUp-inputs input[type="email"],
+.SignUp-inputs input[type="password"],
+.SignUp-inputs input[type="date"],
+.SignUp-inputs input[type="tel"],
+.SignUp-inputs input[type="radio"] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+/* Input field focus */
+.SignUp-inputs input[type="text"]:focus,
+.SignUp-inputs input[type="email"]:focus,
+.SignUp-inputs input[type="password"]:focus,
+.SignUp-inputs input[type="date"]:focus,
+.SignUp-inputs input[type="tel"]:focus {
+  border-color: #00A3A3;
+  box-shadow: 0 0 5px rgba(0, 163, 163, 0.5);
+}
+.gender-selection {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.gender-selection div {
+  display: flex;
+  gap: 20px;
+}
+.gender-selection label {
+  margin: 0px;
+}
+
+.gender-selection input[type="radio"] {
+  margin:0px;
+}
+/* Smaller radio buttons */
+.gender-selection input[type="radio"] {
+  transform: scale(0.8); /* Makes radio buttons smaller */
+  accent-color: #00A3A3; /* Optional: match theme color */
+}
+/* Submit button */
+.SignUp-submit button {
+  width: 400px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #00A3A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.SignUp-submit button:hover {
+  background-color: #00A3A3;
+}
+
+
+/* Footer link */
+.SignUp-footer {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.SignUp-footer a {
+  color: #00A3A3;
+  text-decoration: none;
+}
+
+.SignUp-footer a:hover {
+  text-decoration: underline;
+}
