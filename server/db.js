@@ -25,7 +25,7 @@ const db = mysql.createConnection({
     password: "",
     database: "node-login"
 });
-
+//this is a comment to test 
 // Connect to database
 db.connect(err => {
     if (err) {
