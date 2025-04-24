@@ -11,8 +11,8 @@ function Header() {
         <nav className="header-center">
             <Link to="/home">Home</Link>
             <Link to="/all">All Doctors</Link>
-            <Link to="#">About</Link>
-            <Link to="#">Contact</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
         </nav>
         <div className="header-right">
           <Link to="/signup">

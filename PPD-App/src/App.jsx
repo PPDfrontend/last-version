@@ -6,6 +6,8 @@ import Header from './Component/Header';
 import Home from './Pages/Home'; 
 import All from './Pages/All';
 import Booking from './Pages/Booking';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
 
 function App() {
   return(
@@ -14,12 +16,14 @@ function App() {
       <Header/>
       
        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} /> 
+       <Route path="/" element={<Home />} />
         <Route path="/all" element={<All />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/booking/:doctorId" element={<Booking />} />
+        <Route path="/home" element={<Home />} /> 
       </Routes> 
     </BrowserRouter>
   );

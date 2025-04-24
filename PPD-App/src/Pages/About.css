@@ -1,0 +1,138 @@
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    margin-top: 460px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .highlight {
+    color: #00A3A3;
+  }
+  
+  /* About Us Section */
+  .about-content {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
+  .about-image {
+    flex: 0 0 40%;
+  }
+  
+  .about-image img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .about-text {
+    flex: 0 0 60%;
+  }
+  
+  .about-text p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .vision-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Why Choose Us Section */
+  .choose-us-section {
+    margin-top: 40px;
+  }
+  
+  .benefits-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .benefit-card {
+    flex: 1;
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .benefit-card h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .benefit-card p {
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .about-content {
+      flex-direction: column;
+    }
+    
+    .about-image, .about-text {
+      flex: 0 0 100%;
+    }
+    
+    .benefits-container {
+      flex-direction: column;
+    }
+    
+    .benefit-card {
+      margin-bottom: 20px;
+    }
+  }
+
+  
+.footer4 {
+  background-color: #f3fafa;
+  text-align: center;
+  padding: 5px;
+  color: #666;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+  font-family: Arial, sans-serif;
+  margin-top: 81px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 40px;
+}
+
+.footer-content4 {
+  height: 34px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  bottom: 10px;
+}
+
+.copyright4 {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  top: 18px; 
+}
