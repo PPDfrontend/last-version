@@ -1,28 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './All.css';
 import { useSearchParams, Link } from 'react-router-dom';
-// Import your placeholder images - replace these paths with your actual image paths
+import axios from 'axios';
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
 
 const All = () => {
   const [searchParams] = useSearchParams();
-  
-  // State for tracking dropdown visibility 
   const [specialistDropdownOpen, setSpecialistDropdownOpen] = useState(false);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  
-  // State for selected filters
   const [selectedSpecialist, setSelectedSpecialist] = useState('All Doctors');
   const [selectedLocation, setSelectedLocation] = useState('All Locations');
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  // Refs for dropdown containers
   const specialistDropdownRef = useRef(null);
   const locationDropdownRef = useRef(null);
-
-  // Add a ref to track the scroll position
   const scrollPositionRef = useRef(0);
-  
+
   // Initialize filters from URL parameters
   useEffect(() => {
     const specialist = searchParams.get('specialist');
@@ -35,21 +31,34 @@ const All = () => {
       setSelectedLocation(location);
     }
   }, [searchParams]);
-  
+
+  // Fetch doctors from database
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/api/doctors');
+        setDoctors(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching doctors:', err);
+        setError('Failed to load doctors. Please try again later.');
+        setLoading(false);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
   // Save scroll position when filters change
   useEffect(() => {
-    // Save current scroll position
     scrollPositionRef.current = window.scrollY;
-    
-    // Restore scroll position after a short delay
     const timer = setTimeout(() => {
       window.scrollTo(0, scrollPositionRef.current);
     }, 10);
-    
     return () => clearTimeout(timer);
   }, [selectedSpecialist, selectedLocation]);
 
-  // Sample data
+  // Specialist options
   const specialists = [
     'All Doctors', 
     'Cardiologist', 
@@ -58,12 +67,13 @@ const All = () => {
     'Neurologist',
     'Nephrologist',
     'Pediatrician', 
-    "Psychiatrist",
+    'Psychiatrist',
     'Orthopedic',
     'Ophthalmologist',
     'Generalist'
   ];
   
+  // Location options
   const algerianCities = [
     'All Locations',
     'Algiers',
@@ -76,25 +86,6 @@ const All = () => {
     'Sétif',
     'Sidi Bel Abbès',
     'Biskra'
-  ];
-
-  const doctors = [
-    { id: 1, name: 'Dr. Richard James', specialty: 'General physician', available: false, gender: 'male', location: 'Algiers' },
-    { id: 2, name: 'Dr. Sarah Miller', specialty: 'Cardiologist', available: true, gender: 'female', location: 'Oran' },
-    { id: 3, name: 'Dr. Emily Wilson', specialty: 'Dermatologist', available: true, gender: 'female', location: 'Constantine' },
-    { id: 4, name: 'Dr. John Smith', specialty: 'Neurologist', available: true, gender: 'male', location: 'Annaba' },
-    { id: 5, name: 'Dr. Jennifer Lee', specialty: 'Pediatrician', available: true, gender: 'female', location: 'Blida' },
-    { id: 6, name: 'Dr. Michael Brown', specialty: 'General physician', available: true, gender: 'male', location: 'Batna' },
-    { id: 7, name: 'Dr. David Clark', specialty: 'Orthopedist', available: true, gender: 'male', location: 'Sétif' },
-    { id: 8, name: 'Dr. Robert Taylor', specialty: 'Ophthalmologist', available: false, gender: 'male', location: 'Djelfa' },
-    { id: 9, name: 'Dr. Richard James', specialty: 'General physician', available: false, gender: 'male', location: 'Algiers' },
-    { id: 10, name: 'Dr. Sarah Miller', specialty: 'Cardiologist', available: true, gender: 'female', location: 'Oran' },
-    { id: 11, name: 'Dr. Emily Wilson', specialty: 'Dermatologist', available: true, gender: 'female', location: 'Constantine' },
-    { id: 12, name: 'Dr. John Smith', specialty: 'Neurologist', available: true, gender: 'male', location: 'Annaba' },
-    { id: 13, name: 'Dr. Jennifer Lee', specialty: 'Pediatrician', available: true, gender: 'female', location: 'Blida' },
-    { id: 14, name: 'Dr. Michael Brown', specialty: 'General physician', available: true, gender: 'male', location: 'Batna' },
-    { id: 15, name: 'Dr. David Clark', specialty: 'Orthopedist', available: true, gender: 'male', location: 'Sétif' },
-    { id: 16, name: 'Dr. Robert Taylor', specialty: 'Ophthalmologist', available: false, gender: 'male', location: 'Djelfa' },
   ];
 
   // Function to get the appropriate image based on gender
@@ -128,14 +119,20 @@ const All = () => {
     };
   }, []);
 
+  if (loading) {
+    return <div className="loading-message">Loading doctors...</div>;
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
   return (
     <div className="all-doctors-container">
       <h2 className="browse-title">Browse through the doctors specialist.</h2>
       
       <div className="doctors-section">
         <div className="filters-sidebar">
-          
-          {/* Filter dropdown section */}
           <div className="filters-wrapper">
             <div className="filter-row">
               {/* Specialist Dropdown */}
@@ -198,37 +195,45 @@ const All = () => {
             </div>
           </div>
         </div>
+        
         <div className={`doctors-grid ${(selectedSpecialist !== 'All Doctors' || selectedLocation !== 'All Locations') ? 'filtered' : ''}`}>
-          {filteredDoctors.map(doctor => (
-            <Link 
-              key={doctor.id} 
-              to={`/booking/${doctor.id}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <div className="doctor-card" style={{ cursor: 'pointer' }}>
-                <div className="doctor-image-container">
-                  <img 
-                    src={getDoctorImage(doctor.gender)} 
-                    alt={`Dr. ${doctor.name}`}
-                    className="doctor-image" 
-                  />
-                </div>
-                <div className="doctor-info">
-                  <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
-                    <span className="availability-dot"></span>
-                    <span className="availability-text">
-                      {doctor.available ? 'Available' : 'Unavailable'}
-                    </span>
+          {filteredDoctors.length > 0 ? (
+            filteredDoctors.map(doctor => (
+              <Link 
+                key={doctor.id} 
+                to={`/booking/${doctor.id}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="doctor-card" style={{ cursor: 'pointer' }}>
+                  <div className="doctor-image-container">
+                    <img 
+                      src={getDoctorImage(doctor.gender)} 
+                      alt={`Dr. ${doctor.name}`}
+                      className="doctor-image" 
+                    />
                   </div>
-                  <h3 className="doctor-name">{doctor.name}</h3>
-                  <p className="doctor-specialty">{doctor.specialty}</p>
-                  <p className="doctor-location">{doctor.location}</p>
+                  <div className="doctor-info">
+                    <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
+                      <span className="availability-dot"></span>
+                      <span className="availability-text">
+                        {doctor.available ? 'Available' : 'Unavailable'}
+                      </span>
+                    </div>
+                    <h3 className="doctor-name">Dr. {doctor.name}</h3>
+                    <p className="doctor-specialty">{doctor.specialty}</p>
+                    <p className="doctor-location">{doctor.location}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <div className="no-doctors-message">
+              No doctors found matching your criteria.
+            </div>
+          )}
         </div>
       </div>
+      
       <footer className="footer">
         <div className="footer-content">
           <p className="copyright2">Copyright © 2025 TABIBII - All Right Reserved.</p>

@@ -4,7 +4,7 @@ import cors from 'cors';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcrypt';
-//this is a comment to test git commit
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -14,8 +14,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false, // Set to true if using HTTPS
-        maxAge: 1000 * 60 * 60 * 24 // 1 day
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
@@ -23,7 +23,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "node-login"
+    database: "node-login" // Your main database
 });
 
 // Connect to database
@@ -49,10 +49,9 @@ const checkEmailExists = (email) => {
     });
 };
 
-// Fix the endpoint to match what frontend is expecting
+// Signup endpoint
 app.post('/signup', async (req, res) => {
     try {
-        // Validate that password and confirmed password match
         if (req.body.password !== req.body.cpassword) {
             return res.status(400).json({
                 success: false,
@@ -60,7 +59,6 @@ app.post('/signup', async (req, res) => {
             });
         }
         
-        // Check if email already exists
         const emailExists = await checkEmailExists(req.body.email);
         if (emailExists) {
             return res.status(409).json({
@@ -69,22 +67,17 @@ app.post('/signup', async (req, res) => {
             });
         }
         
-        // Generate salt and hash the password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-        
-        // Also hash the confirmed password if you're storing it
-        // Note: It's better practice not to store the confirmed password in the database
-        const hashedCPassword = hashedPassword; // Use same hash since they match
+        const hashedCPassword = hashedPassword;
         
         const sql = "INSERT INTO user_info (`first_name`, `last_name`, `email`, `password`, `cpassword`, `phone`, `dob`, `gender`) VALUES (?)";
-        //mdlsqkjfqdsmf
         const formData = [
             req.body.first_name,
             req.body.last_name,
             req.body.email,
-            hashedPassword,     // Store hashed password
-            hashedCPassword,    // Store hashed confirm password
+            hashedPassword,
+            hashedCPassword,
             req.body.phone,
             req.body.dob,
             req.body.gender,
@@ -103,6 +96,7 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+// Login endpoint
 app.post('/Login', (req, res) => {
     const sql = "SELECT * FROM user_info WHERE email = ?";
     
@@ -114,16 +108,13 @@ app.post('/Login', (req, res) => {
         
         if (result.length > 0) {
             try {
-                // Compare the provided password with the stored hash
                 const match = await bcrypt.compare(req.body.password, result[0].password);
                 
                 if (match) {
-                    // Password is correct
-                    req.session.email = result[0].email; // Store user info in session
+                    req.session.email = result[0].email;
                     console.log(req.session.email);
                     return res.json({login: true});
                 } else {
-                    // Password is incorrect
                     return res.json({login: false, message: "Invalid email or password"});
                 }
             } catch (error) {
@@ -134,6 +125,59 @@ app.post('/Login', (req, res) => {
             return res.json({login: false, message: "Invalid email or password"});
         }
     });    
+});
+
+// Doctors endpoints
+app.get('/api/doctors', (req, res) => {
+    const sql = "SELECT DoctorID as id, FirstName, LastName, Specialization as specialty, Email, PhoneNum as phone, LicenseNumber as license FROM doctor";
+    
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ 
+                error: 'Error fetching doctors',
+                details: err.message
+            });
+        }
+        
+        // Format the results to match your frontend expectations
+        const formattedDoctors = result.map(doctor => ({
+            id: doctor.id,
+            name: `Dr. ${doctor.FirstName} ${doctor.LastName}`,
+            specialty: doctor.specialty,
+            email: doctor.Email,
+            phone: doctor.phone,
+            license: doctor.license,
+            // Add default location and gender if needed
+            location: 'Algiers', // Default or fetch from AddressID
+            gender: 'male' // Default or add to your schema
+        }));
+        
+        return res.json(formattedDoctors);
+    });
+});
+app.get('/api/doctors/search', (req, res) => {
+    const { specialist, location } = req.query;
+    let sql = "SELECT id, name, specialty, location, gender FROM doctor WHERE 1=1"; // Changed to singular 'doctor'
+    const params = [];
+    
+    if (specialist) {
+        sql += " AND specialty LIKE ?";
+        params.push(`%${specialist}%`);
+    }
+    
+    if (location) {
+        sql += " AND location LIKE ?";
+        params.push(`%${location}%`);
+    }
+    
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Error searching doctors' });
+        }
+        return res.json(result);
+    });
 });
 
 app.listen(8081, () => {

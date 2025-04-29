@@ -21,7 +21,7 @@ function Login() {
     axios.post('http://localhost:8081/Login', { email, password })
       .then(res => {
         if (res.data.login) {
-          navigate('/home-page2');
+          navigate('/home');
         } else {
           setMessage('Invalid email or password');
         }
