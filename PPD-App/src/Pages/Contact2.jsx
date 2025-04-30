@@ -1,13 +1,13 @@
 import React from 'react';
 import contact_image from '../assets/contact_image.png';
 import './Contact.css';
-import Header from '../Component/Header';
+import Header from "../Component/Header-home";
 
-const Contact = () => {
+const Contact2 = () => {
   return (
-  <>
-  <Header/>
-  <div className="contact-container">
+<>
+<Header/>
+    <div className="contact-container">
       <h2 className="contact-title">CONTACT <span className="highlight">US</span></h2>
       
       <div className="contact-content">
@@ -40,8 +40,8 @@ const Contact = () => {
         </div>
       </footer>
     </div>
-  </>
+</>
   );
 };
 
-export default Contact;
+export default Contact2;

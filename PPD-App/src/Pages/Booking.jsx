@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 // Import your placeholder images
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
+import Header from "../Component/Header-home";
 
 const Booking = () => {
   const { doctorId } = useParams();
@@ -64,6 +65,8 @@ const Booking = () => {
   }
 
   return (
+  <>
+  <Header/>
     <div className="booking-container">
       <div className="doctor-profile">
         <div className="doctor-image-container">
@@ -134,6 +137,7 @@ const Booking = () => {
       </footer>
       
     </div>
+  </>
     
   );
 };

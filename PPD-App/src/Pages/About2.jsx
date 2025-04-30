@@ -1,12 +1,12 @@
 import React from 'react';
 import about_image from '../assets/about_image.png';
+import Header from "../Component/Header-home";
 import './About.css';
-import Header from '../Component/Header';
 
-const About = () => {
+const About2 = () => {
   return (
-  <>
-  <Header/>
+<>
+<Header/>
     <div className="about-container">
       <div className="about-us-section">
         <h2 className="section-title">ABOUT <span className="highlight">US</span></h2>
@@ -68,8 +68,8 @@ const About = () => {
         </div>
       </footer>
     </div>
-  </>
+</>
   );
 };
 
-export default About;
+export default About2;

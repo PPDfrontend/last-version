@@ -33,7 +33,7 @@ function Signup() {
       // Use only one API call
       const response = await axios.post('http://localhost:8081/signup', formData);
       console.log('User registered successfully:', response.data);
-      navigate('/'); // Redirect to home page or login page
+      navigate('/Home2'); // Redirect to home page or login page
     } catch (error) {
       console.error('Error registering user:', error);
       setMessage(error.response?.data?.message || 'Registration failed');

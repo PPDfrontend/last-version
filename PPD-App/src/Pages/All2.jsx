@@ -4,7 +4,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
-import Header from "../Component/Header";
+import Header from "../Component/Header-home";
 
 const All = () => {
   const [searchParams] = useSearchParams();
@@ -129,8 +129,8 @@ const All = () => {
   }
 
   return (
-  <>
-  <Header/>
+<>
+<Header/>
     <div className="all-doctors-container">
       <h2 className="browse-title">Browse through the doctors specialist.</h2>
       
@@ -202,7 +202,11 @@ const All = () => {
         <div className={`doctors-grid ${(selectedSpecialist !== 'All Doctors' || selectedLocation !== 'All Locations') ? 'filtered' : ''}`}>
           {filteredDoctors.length > 0 ? (
             filteredDoctors.map(doctor => (
-              <Link to ="/Login">
+              <Link 
+                key={doctor.id} 
+                to={`/Booking/${doctor.id}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
                 <div className="doctor-card" style={{ cursor: 'pointer' }}>
                   <div className="doctor-image-container">
                     <img 
@@ -239,7 +243,7 @@ const All = () => {
         </div>
       </footer>
     </div>
-  </>
+</>
   );
 };
 

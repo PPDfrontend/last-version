@@ -21,7 +21,7 @@ function Login() {
     axios.post('http://localhost:8081/Login', { email, password })
       .then(res => {
         if (res.data.login) {
-          navigate('/home');
+          navigate('/Home2');
         } else {
           setMessage('Invalid email or password');
         }
@@ -81,7 +81,8 @@ function Login() {
               <a href="#">Forgot Password?</a>
             </div>
             <div className="login-submit">
-              <button type="submit">Log In</button>
+                <button type="submit">Log In</button>
+
             </div>
           </form>
           <p className="login-footer">

@@ -6,9 +6,9 @@ import groupimage from '../assets/group_profiles.png';
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
 import axios from 'axios';
-import Header from '../Component/Header';
+import Header from '../Component/Header-home';
 
-function Home() {
+function Home2() {
   const [specialistInput, setSpecialistInput] = useState('');
   const [filteredSpecialists, setFilteredSpecialists] = useState([]);
   const [showSpecialistOptions, setShowSpecialistOptions] = useState(false);
@@ -108,7 +108,7 @@ function Home() {
             <p className="hero-text">
               Explore our list of trusted doctors and book your appointment free.  
             </p>
-            <Link to="/Login" className="book-button1">
+            <Link to="/All2" className="book-button1">
               Book appointment <span className="arrow">→</span>
             </Link>
           </div>
@@ -241,4 +241,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home2;
