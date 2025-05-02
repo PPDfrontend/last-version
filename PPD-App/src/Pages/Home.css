@@ -209,6 +209,8 @@ h1 {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  text-decoration: none; 
+  display: inline-block;
 }
 
 .search-button1 a {

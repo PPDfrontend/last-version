@@ -10,8 +10,12 @@ const All2 = () => {
   const [searchParams] = useSearchParams();
   const [specialistDropdownOpen, setSpecialistDropdownOpen] = useState(false);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  const [selectedSpecialist, setSelectedSpecialist] = useState('All Doctors');
-  const [selectedLocation, setSelectedLocation] = useState('All Locations');
+  const [selectedSpecialist, setSelectedSpecialist] = useState(
+    searchParams.get('specialist') || 'All Doctors'
+  );
+  const [selectedLocation, setSelectedLocation] = useState(
+    searchParams.get('location') || 'All Locations'
+  );
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,16 +24,6 @@ const All2 = () => {
   const locationDropdownRef = useRef(null);
   const scrollPositionRef = useRef(0);
 
-  // Initialize filters from URL parameters
-  useEffect(() => {
-    const specialist = searchParams.get('specialist');
-    const location = searchParams.get('location');
-    
-    if (specialist) setSelectedSpecialist(specialist);
-    if (location) setSelectedLocation(location);
-  }, [searchParams]);
-
-  // Fetch doctors from database
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -46,7 +40,6 @@ const All2 = () => {
     fetchDoctors();
   }, []);
 
-
   useEffect(() => {
     scrollPositionRef.current = window.scrollY;
     const timer = setTimeout(() => {
@@ -54,7 +47,6 @@ const All2 = () => {
     }, 10);
     return () => clearTimeout(timer);
   }, [selectedSpecialist, selectedLocation]);
-
 
   const specialists = [
     'All Doctors', 
@@ -84,28 +76,26 @@ const All2 = () => {
     'Biskra'
   ];
 
-  // Guess image based on name (name-based gender guess)
   const getDoctorImage = (name) => {
     const femaleNames = [
-    'imane zerrouki', 'meriem chaouch', 'sara gacem', 'lina harbi',
+      'imane zerrouki', 'meriem chaouch', 'sara gacem', 'lina harbi',
       'yasmine merabet', 'nadia belkacem', 'selma kaci', 'rania lounis',
       'mouna derbal', 'houda benaissa', 'amina ould ali', 'layla rezig',
-      'sabrina benslama', 'fatma zerhouni', 'lamia salah'  ];
+      'sabrina benslama', 'fatma zerhouni', 'lamia salah'
+    ];
     const lowerName = name.toLowerCase();
     return femaleNames.some(fname => lowerName.includes(fname)) ? femaleDoctorImage : maleDoctorImage;
   };
 
   const filteredDoctors = doctors.filter(doctor => {
     const matchesSpecialty = selectedSpecialist === 'All Doctors' || 
-      doctor.specialty.toLowerCase().includes(selectedSpecialist.toLowerCase());
+      doctor.specialty.toLowerCase() === selectedSpecialist.toLowerCase();
     const matchesLocation = selectedLocation === 'All Locations' || 
-      doctor.location === selectedLocation;
+      doctor.location.toLowerCase() === selectedLocation.toLowerCase();
     return matchesSpecialty && matchesLocation;
   });
 
-  
   useEffect(() => {
-
     const handleClickOutside = (event) => {
       if (specialistDropdownRef.current && !specialistDropdownRef.current.contains(event.target)) {
         setSpecialistDropdownOpen(false);
