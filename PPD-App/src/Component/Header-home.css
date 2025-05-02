@@ -1,0 +1,52 @@
+.main-header2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 99%;
+    height: 65px; /* Reduced from 70px to match the image */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 0 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05); 
+    z-index: 1000;
+    font-family: 'Roboto', sans-serif;
+  
+  }
+    
+  .header-left2 .logo2 {
+    height: 150px; 
+  }
+    .header-center2 {
+      display: flex;
+      gap: 40px;
+    }
+    
+    .header-center2 a {
+      color: #333;
+      text-decoration: none;
+      font-size: 22px;
+      position: relative;
+    }
+    
+    .header-center2 a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #00A3A3;
+      transition: width 0.3s ease-in-out;
+    }
+    
+    .header-center2 a:hover::after {
+      width: 100%;
+    }
+    .header-right2{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    
+    }

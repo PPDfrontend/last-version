@@ -46,7 +46,7 @@ const All2 = () => {
     fetchDoctors();
   }, []);
 
-  // Save scroll position when filters change
+
   useEffect(() => {
     scrollPositionRef.current = window.scrollY;
     const timer = setTimeout(() => {
@@ -214,7 +214,7 @@ const All2 = () => {
                           {doctor.available ? 'Available' : 'Unavailable'}
                         </span>
                       </div>
-                      <h3 className="doctor-name">Dr. {doctor.name}</h3>
+                      <h3 className="doctor-name">{doctor.name}</h3>
                       <p className="doctor-specialty">{doctor.specialty}</p>
                       <p className="doctor-location">{doctor.location}</p>
                     </div>

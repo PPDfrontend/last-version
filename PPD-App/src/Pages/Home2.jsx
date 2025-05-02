@@ -230,7 +230,7 @@ function Home2() {
                     alt={`Doctor ${doctor.name}`} 
                     className="doctor-img" 
                   />
-                  <h3>Dr. {doctor.name}</h3>
+                  <h3>{doctor.name}</h3>
                   <p>Specialty: {doctor.specialty}</p>
                   <p>Location: {doctor.location}</p>
                   <button 

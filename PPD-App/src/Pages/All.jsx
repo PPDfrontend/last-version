@@ -259,7 +259,7 @@ const All = () => {
                           {doctor.available ? 'Available' : 'Unavailable'}
                         </span>
                       </div>
-                      <h3 className="doctor-name">Dr. {doctor.firstName} {doctor.lastName || doctor.name}</h3>
+                      <h3 className="doctor-name">{doctor.firstName} {doctor.lastName || doctor.name}</h3>
                       <p className="doctor-specialty">{doctor.specialization || doctor.specialty}</p>
                       <p className="doctor-location">{doctor.location || "Algiers"}</p>
                     </div>

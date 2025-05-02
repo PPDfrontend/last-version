@@ -173,6 +173,8 @@
   }
   
   .book-button {
+    position: relative;
+    top: 15px;
     width: 100%;
     max-width: 300px;
     padding: 12px;
