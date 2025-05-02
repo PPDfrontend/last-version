@@ -5,7 +5,7 @@ import Header from "../Component/Header-home";
 import profilePic from "../assets/myacc-pic.png"; // ✅ Adjusted image path
 
 function MyAcc() {
-  // Temporary user data for demonstration — replace with real data or props/state
+  
   const user = {
     fullName: "User Name",
     email: "user@example.com",

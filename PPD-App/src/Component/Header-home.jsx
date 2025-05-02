@@ -4,11 +4,11 @@ import myaccPic from '../assets/myacc-pic.png'; // replace with the correct path
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 
-function Header() {
+function Headerhome() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -18,28 +18,28 @@ function Header() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
+  
   const handleNavigation = (path) => {
     setDropdownOpen(false);
     navigate(path);
   };
-
+  
   return (
     <header className="main-header">
       <div className="header-left">
         <img src={logo} alt="Tabibi Logo" className="logo" />
       </div>
-
+      
       <nav className="header-center">
         <Link to="/Home2">Home</Link>
-        <Link to="/All2">Doctors</Link>
+        <Link to="/All2">All Doctors</Link>
         <Link to="/About2">About</Link>
         <Link to="/Contact2">Contact</Link>
       </nav>
-
+      
       <div className="header-right" ref={dropdownRef}>
         <div
-          className="filter-dropdown-header"
+          className="profile-container"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <img
@@ -47,14 +47,13 @@ function Header() {
             alt="Profile"
             className="profile-image"
           />
-          <span className={`dropdown-arrow ${dropdownOpen ? 'open' : ''}`}>▼</span>
         </div>
-
+        
         {dropdownOpen && (
-          <div className="dropdown-content right-aligned-dropdown">
+          <div className="account-dropdown">
             <div className="dropdown-item" onClick={() => handleNavigation('/MyAcc')}>My Profile</div>
             <div className="dropdown-item" onClick={() => handleNavigation('/All2')}>My Appointments</div>
-            <div className="dropdown-item" onClick={() => handleNavigation('/Login')}>Log Out</div>
+            <div className="dropdown-item logout" onClick={() => handleNavigation('/Login')}>Logout</div>
           </div>
         )}
       </div>
@@ -62,4 +61,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Headerhome;

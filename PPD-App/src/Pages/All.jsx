@@ -5,6 +5,8 @@ import axios from 'axios';
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
 import Header from "../Component/Header";
+// Import the doctor image for fallback (if needed)
+import doctorImage from '../assets/doctor.png';
 
 const All = () => {
   const [searchParams] = useSearchParams();
@@ -62,16 +64,19 @@ const All = () => {
   // Specialist options
   const specialists = [
     'All Doctors', 
-    'Cardiologist', 
-    'Dentist',
-    'Dermatologist', 
-    'Neurologist',
-    'Nephrologist',
-    'Pediatrician', 
-    'Psychiatrist',
-    'Orthopedic',
-    'Ophthalmologist',
-    'Generalist'
+    'Cardiologie', 
+    'Dermatologie',
+    'Neurologie', 
+    'Pédiatrie',
+    'Médecine Générale',
+    'Gynécologie-Obstétrique', 
+    'Radiologie',
+    'Orthopédie',
+    'ORL',
+    'Urologie',
+    'Ophtalmologie',
+    'Psychiatrie',
+    'Chirurgie Générale'
   ];
   
   // Location options
@@ -89,15 +94,39 @@ const All = () => {
     'Biskra'
   ];
 
-  // Function to get the appropriate image based on gender
-  const getDoctorImage = (gender) => {
-    return gender === 'female' ? femaleDoctorImage : maleDoctorImage;
+  // Function to determine which image to show based on the doctor's name
+  const getDoctorImage = (name) => {
+    // If no name is provided, return a default image
+    if (!name) return doctorImage;
+    
+    // Normalize the name to lowercase for case-insensitive comparison
+    const normalizedName = name.toLowerCase();
+    
+    // List of female doctors from your database (using full names to ensure accuracy)
+    const femaleDoctorNames = [
+      'imane zerrouki', 'meriem chaouch', 'sara gacem', 'lina harbi',
+      'yasmine merabet', 'nadia belkacem', 'selma kaci', 'rania lounis',
+      'mouna derbal', 'houda benaissa', 'amina ould ali', 'layla rezig',
+      'sabrina benslama', 'fatma zerhouni', 'lamia salah'
+    ];
+    
+    // Check if the doctor's name contains any of the female names
+    for (const femaleName of femaleDoctorNames) {
+      if (normalizedName.includes(femaleName.split(' ')[0])) {
+        console.log("Female doctor found:", name);
+        return femaleDoctorImage;
+      }
+    }
+    
+    // If no match found in female names, return male image
+    console.log("Male doctor found:", name);
+    return maleDoctorImage;
   };
   
   // Filter doctors based on selection
   const filteredDoctors = doctors.filter(doctor => {
     const matchesSpecialty = selectedSpecialist === 'All Doctors' || 
-      doctor.specialty.toLowerCase().includes(selectedSpecialist.toLowerCase());
+      doctor.specialization?.toLowerCase().includes(selectedSpecialist.toLowerCase());
     const matchesLocation = selectedLocation === 'All Locations' || 
       doctor.location === selectedLocation;
     return matchesSpecialty && matchesLocation;
@@ -119,6 +148,12 @@ const All = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // Helper function to extract first name from full name
+  const getFirstName = (fullName) => {
+    if (!fullName) return '';
+    return fullName.split(' ')[0];
+  };
 
   if (loading) {
     return <div className="loading-message">Loading doctors...</div>;
@@ -201,30 +236,37 @@ const All = () => {
         
         <div className={`doctors-grid ${(selectedSpecialist !== 'All Doctors' || selectedLocation !== 'All Locations') ? 'filtered' : ''}`}>
           {filteredDoctors.length > 0 ? (
-            filteredDoctors.map(doctor => (
-              <Link to ="/Login">
-                <div className="doctor-card" style={{ cursor: 'pointer' }}>
-                  <div className="doctor-image-container">
-                    <img 
-                      src={getDoctorImage(doctor.gender)} 
-                      alt={`Dr. ${doctor.name}`}
-                      className="doctor-image" 
-                    />
-                  </div>
-                  <div className="doctor-info">
-                    <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
-                      <span className="availability-dot"></span>
-                      <span className="availability-text">
-                        {doctor.available ? 'Available' : 'Unavailable'}
-                      </span>
+            filteredDoctors.map(doctor => {
+              // Get the full name of the doctor for image determination
+              const fullName = doctor.firstName && doctor.lastName 
+                ? `${doctor.firstName} ${doctor.lastName}` 
+                : doctor.name || '';
+              
+              return (
+                <Link to="/Login" key={doctor.doctorID || doctor.id}>
+                  <div className="doctor-card" style={{ cursor: 'pointer' }}>
+                    <div className="doctor-image-container">
+                      <img 
+                        src={getDoctorImage(fullName)} 
+                        alt={`Dr. ${fullName}`}
+                        className="doctor-image" 
+                      />
                     </div>
-                    <h3 className="doctor-name">Dr. {doctor.name}</h3>
-                    <p className="doctor-specialty">{doctor.specialty}</p>
-                    <p className="doctor-location">{doctor.location}</p>
+                    <div className="doctor-info">
+                      <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
+                        <span className="availability-dot"></span>
+                        <span className="availability-text">
+                          {doctor.available ? 'Available' : 'Unavailable'}
+                        </span>
+                      </div>
+                      <h3 className="doctor-name">Dr. {doctor.firstName} {doctor.lastName || doctor.name}</h3>
+                      <p className="doctor-specialty">{doctor.specialization || doctor.specialty}</p>
+                      <p className="doctor-location">{doctor.location || "Algiers"}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))
+                </Link>
+              );
+            })
           ) : (
             <div className="no-doctors-message">
               No doctors found matching your criteria.

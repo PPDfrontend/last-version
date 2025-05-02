@@ -35,6 +35,25 @@ function Home() {
     'Batna', 'Djelfa', 'Sétif', 'Sidi Bel Abbès', 'Biskra'
   ];
 
+  // Function to determine which image to show based on the doctor's name
+  const getDoctorImage = (name) => {
+    // Convert name to lowercase for case-insensitive comparison
+    const lowerName = name.toLowerCase();
+    
+    // List of female doctors from your screenshot
+    const femaleDoctors = ['imane zerrouki', 'meriem chaouch', 'sara gacem', 'lina harbi'];
+    
+    // Check if the doctor is in our list of female doctors
+    for (const femaleDoctor of femaleDoctors) {
+      if (lowerName.includes(femaleDoctor.toLowerCase())) {
+        return femaleDoctorImage;
+      }
+    }
+    
+    // If the doctor is not in our list of female doctors, return the male image
+    return maleDoctorImage;
+  };
+
   useEffect(() => {
     setFilteredSpecialists(specialists);
     setFilteredLocations(locations);
@@ -205,8 +224,9 @@ function Home() {
             {doctors.length > 0 ? (
               doctors.slice(0, 8).map((doctor) => (
                 <div key={doctor.id} className="doctor-card1">
+                  {/* Show the appropriate doctor image based on the name */}
                   <img 
-                    src={doctor.gender === 'female' ? femaleDoctorImage : maleDoctorImage} 
+                    src={getDoctorImage(doctor.name)} 
                     alt={`Doctor ${doctor.name}`} 
                     className="doctor-img" 
                   />

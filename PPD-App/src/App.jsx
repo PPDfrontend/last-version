@@ -2,8 +2,8 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
-import Home from './Pages/Home'; 
-import Home2 from './Pages/Home2'; 
+import Home from './Pages/Home';
+import Home2 from './Pages/Home2';
 import All from './Pages/All';
 import All2 from './Pages/All2';
 import Booking from './Pages/Booking';
@@ -15,10 +15,10 @@ import MyAcc from './Pages/MyAcc';
 
 function App() {
   return(
-  <Router>
-       <Routes>
-       <Route path="/" element={<Home />} />
-       <Route path="Home2" element={<Home2 />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Home2" element={<Home2 />} />
         <Route path="/All" element={<All />} />
         <Route path="/All2" element={<All2 />} />
         <Route path="/About" element={<About />} />
@@ -29,9 +29,9 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Booking/:doctorId" element={<Booking />} />
-      </Routes> 
+      </Routes>
     </Router>
   );
 }
 
-export default App; 
+export default App;
