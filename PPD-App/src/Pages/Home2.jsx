@@ -220,12 +220,13 @@ function Home2() {
                     <h3>{doctor.name}</h3>
                     <p>Specialty: {doctor.specialty}</p>
                     <p>Location: {doctor.location}</p>
+                    <Link to= {`/doctor/${doctor.id}`} className="doctor-details-link">
                     <button 
                       className="book-doctor-btn"
                       onClick={() => handleBookAppointment(doctor.id)}
                     >
                       Book Appointment
-                    </button>
+                    </button></Link>
                   </div>
                 ))
               ) : (
