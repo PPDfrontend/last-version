@@ -52,7 +52,7 @@ function Headerhome() {
         {dropdownOpen && (
           <div className="account-dropdown">
             <div className="dropdown-item" onClick={() => handleNavigation('/MyAcc')}>My Profile</div>
-            <div className="dropdown-item" onClick={() => handleNavigation('/All2')}>My Appointments</div>
+            <div className="dropdown-item" onClick={() => handleNavigation('/Appointments')}>My Appointments</div>
             <div className="dropdown-item logout" onClick={() => handleNavigation('/Login')}>Logout</div>
           </div>
         )}

@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import './Booking.css';
 import { CheckCircle } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import maleDoctorImage from '../assets/male-doctor.png'; 
 import femaleDoctorImage from '../assets/female-doctor.png';
 import Header from "../Component/Header-home";
@@ -17,19 +18,18 @@ const femaleNames = [
 // Determine image by checking name
 const getDoctorImage = (name) => {
   const cleanedName = name.replace('Dr. ', '').toLowerCase();
-  const isFemale = femaleNames.includes(cleanedName);
+  const isFemale = femaleNames.some(fname => cleanedName.includes(fname));
   return isFemale ? femaleDoctorImage : maleDoctorImage;
 };
 
 const Booking = () => {
   const { doctorId } = useParams();
-  const [selectedDay, setSelectedDay] = useState('SUN');
+  const navigate = useNavigate();
+  const [selectedDay, setSelectedDay] = useState('');
   const [selectedTime, setSelectedTime] = useState('9:00 am');
   const [doctor, setDoctor] = useState(null);
-
-  const days = [
-    { id: 'SUN' }, { id: 'MON' }, { id: 'TUE' }, { id: 'WED' }, { id: 'THU' },
-  ];
+  const [successMessage, setSuccessMessage] = useState('');
+  const [days, setDays] = useState([]);
 
   const times = [
     '8:00 am', '8:30 am', '9:00 am', '9:30 am',
@@ -70,6 +70,29 @@ const Booking = () => {
   ];
 
   useEffect(() => {
+    const today = new Date();
+    const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const generatedDays = [];
+    
+    // Start with the next day (tomorrow) and show 5 days
+    for (let i = 0; i < 5; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i + 1); // +1 to start from tomorrow
+      
+      const dayOfWeek = dayNames[date.getDay()];
+      const dayOfMonth = date.getDate();
+      
+      generatedDays.push({
+        id: dayOfWeek,
+        number: dayOfMonth.toString()
+      });
+    }
+    
+    setDays(generatedDays);
+    setSelectedDay(generatedDays[0].id); // Select first day by default
+  }, []);
+
+  useEffect(() => {
     if (doctorId) {
       const foundDoctor = doctorsData.find(doc => doc.id === parseInt(doctorId));
       if (foundDoctor) {
@@ -78,7 +101,52 @@ const Booking = () => {
     }
   }, [doctorId]);
 
-  if (!doctor) {
+  const handleBookAppointment = () => {
+    if (!doctor || !selectedDay) return;
+    
+    // Find selected day details
+    const selectedDayObj = days.find(day => day.id === selectedDay);
+    
+    // Get current date information for formatting
+    const today = new Date();
+    const currentMonth = today.toLocaleString('default', { month: 'long' });
+    const currentYear = today.getFullYear();
+    
+    // Format date with current month and year
+    const date = `${selectedDayObj.number} ${currentMonth}, ${currentYear}`;
+    
+    // Create appointment object
+    const newAppointment = {
+      id: Date.now(), // Unique ID
+      doctorId: doctor.id,
+      doctorName: doctor.name,
+      doctorImage: getDoctorImage(doctor.name),
+      specialty: doctor.specialty,
+      address: `Rue 3 Nouvelle Villa Constantine Algeria`,
+      date: date,
+      time: selectedTime,
+      status: 'Upcoming'
+    };
+    
+    // Retrieve existing appointments
+    const existingAppointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    
+    // Add new appointment
+    const updatedAppointments = [...existingAppointments, newAppointment];
+    
+    // Save to localStorage
+    localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+    
+    // Show success message
+    setSuccessMessage('Appointment booked successfully!');
+    
+    // Redirect to appointments page after a short delay
+    setTimeout(() => {
+      navigate('/appointments');
+    }, 1500);
+  };
+
+  if (!doctor || days.length === 0) {
     return <div className="loading">Loading doctor information...</div>;
   }
 
@@ -86,6 +154,12 @@ const Booking = () => {
     <>
       <Header/>
       <div className="booking-container">
+        {successMessage && (
+          <div className="success-message">
+            {successMessage}
+          </div>
+        )}
+        
         <div className="doctor-profile">
           <div className="doctor-image-container">
             <img 
@@ -146,7 +220,7 @@ const Booking = () => {
             ))}
           </div>
 
-          <button className="book-button">Book an appointment</button>
+          <button className="book-button" onClick={handleBookAppointment}>Book an appointment</button>
         </div>
         <footer className="footer3">
           <div className="footer-content1">
