@@ -25,15 +25,44 @@ function Home() {
   const locationDropdownRef = useRef(null);
   
   const specialists = [
-    "Cardiologist", "Dermatologist", "Neurologist", "Nephrologist", 
-    "Pediatrician", "Psychiatrist", "Orthopedic", "Ophthalmologist", 
-    "Generalist", "Dentist"
+    'All Doctors', 
+    'Cardiologie', 
+    'Dermatologie',
+    'Neurologie', 
+    'Pédiatrie',
+    'Médecine Générale',
+    'Gynécologie-Obstétrique', 
+    'Radiologie',
+    'Orthopédie',
+    'ORL',
+    'Urologie',
+    'Ophtalmologie',
+    'Psychiatrie',
+    'Chirurgie Générale'
   ];
   
+      
   const locations = [
-    'Algiers', 'Oran', 'Constantine', 'Annaba', 'Blida',
-    'Batna', 'Djelfa', 'Sétif', 'Sidi Bel Abbès', 'Biskra'
+    'Algiers',
+    'Annaba',
+    'Batna',
+    'Blida',
+    'Béjaïa',
+    'Constantine',
+    'Djelfa',
+    'Guelma',
+    'Jijel',
+    "M'Sila",
+    'Mila',
+    'Médéa',
+    'Oran',
+    'Relizane',
+    'Sidi Bel Abbès',
+    'Skikda',
+    'Tizi Ouzou',
+    'Tlemcen'
   ];
+  
 
   // Function to determine which image to show based on the doctor's name
   const getDoctorImage = (name) => {

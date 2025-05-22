@@ -14,7 +14,38 @@ const All = () => {
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [selectedSpecialist, setSelectedSpecialist] = useState('All Doctors');
   const [selectedLocation, setSelectedLocation] = useState('All Locations');
-  const [doctors, setDoctors] = useState([]);
+  const [doctors, setDoctors] = useState([
+    { id: 31, name: 'Dr. Nassim Benkhaled', specialty: 'Cardiologie', available: true, gender: 'male', location: 'Constantine' },
+    { id: 32, name: 'Dr. Imane Zerrouki', specialty: 'Dermatologie', available: true, gender: 'female', location: 'Constantine' },
+    { id: 33, name: 'Dr. Khaled Bouchareb', specialty: 'Neurologie', available: true, gender: 'male', location: 'Constantine' },
+    { id: 34, name: 'Dr. Meriem Chaouch', specialty: 'Pédiatrie', available: true, gender: 'female', location: 'Constantine' },
+    { id: 35, name: 'Dr. Riad Saadi', specialty: 'Médecine Générale', available: true, gender: 'male', location: 'Constantine' },
+    { id: 36, name: 'Dr. Sara Gacem', specialty: 'Gynécologie-Obstétrique', available: true, gender: 'female', location: 'Constantine' },
+    { id: 37, name: 'Dr. Lina Harbi', specialty: 'Radiologie', available: true, gender: 'female', location: 'Algiers' },
+    { id: 38, name: 'Dr. Amine Bouabdellah', specialty: 'Radiologie', available: true, gender: 'male', location: 'Algiers' },
+    { id: 39, name: 'Dr. Yasmine Merabet', specialty: 'Orthopédie', available: true, gender: 'female', location: 'Algiers' },
+    { id: 40, name: 'Dr. Tarek Sebaa', specialty: 'ORL', available: true, gender: 'male', location: 'Oran' },
+    { id: 41, name: 'Dr. Nadia Belkacem', specialty: 'Cardiologie', available: true, gender: 'female', location: 'Oran' },
+    { id: 42, name: 'Dr. Selma Kaci', specialty: 'Médecine Générale', available: true, gender: 'female', location: 'Blida' },
+    { id: 43, name: 'Dr. Zine Kherbache', specialty: 'Pédiatrie', available: true, gender: 'male', location: 'Blida' },
+    { id: 44, name: 'Dr. Hakim Mansouri', specialty: 'Urologie', available: true, gender: 'male', location: 'Batna' },
+    { id: 45, name: 'Dr. Rania Lounis', specialty: 'Neurologie', available: true, gender: 'female', location: 'Batna' },
+    { id: 46, name: 'Dr. Kamel Zerguine', specialty: 'Ophtalmologie', available: true, gender: 'male', location: 'Annaba' },
+    { id: 47, name: 'Dr. Mouna Derbal', specialty: 'Gynécologie-Obstétrique', available: true, gender: 'female', location: 'Annaba' },
+    { id: 48, name: 'Dr. Walid Kaci', specialty: 'Dermatologie', available: true, gender: 'male', location: 'Béjaïa' },
+    { id: 49, name: 'Dr. Houda Benaissa', specialty: 'Dermatologie', available: true, gender: 'female', location: 'Béjaïa' },
+    { id: 50, name: 'Dr. Nabil Benziane', specialty: 'Psychiatrie', available: true, gender: 'male', location: 'Djelfa' },
+    { id: 51, name: 'Dr. Amina Ould Ali', specialty: 'ORL', available: true, gender: 'female', location: 'Tizi Ouzou' },
+    { id: 52, name: 'Dr. Farid Bouraoui', specialty: 'Chirurgie Générale', available: true, gender: 'male', location: 'Tlemcen' },
+    { id: 53, name: 'Dr. Layla Rezig', specialty: 'Orthopédie', available: true, gender: 'female', location: 'Skikda' },
+    { id: 54, name: 'Dr. Reda Bendimerad', specialty: 'Radiologie', available: true, gender: 'male', location: 'Sidi Bel Abbès' },
+    { id: 55, name: 'Dr. Sabrina Benslama', specialty: 'Pédiatrie', available: true, gender: 'female', location: 'Jijel' },
+    { id: 56, name: 'Dr. Karim Gherbi', specialty: 'Médecine Générale', available: true, gender: 'male', location: 'Médéa' },
+    { id: 57, name: 'Dr. Fatma Zerhouni', specialty: 'Médecine Générale', available: true, gender: 'female', location: 'Relizane' },
+    { id: 58, name: 'Dr. Yassine Aouchiche', specialty: 'Neurologie', available: true, gender: 'male', location: 'Guelma' },
+    { id: 59, name: 'Dr. Lamia Salah', specialty: 'Urologie', available: true, gender: 'female', location: "M'Sila" },
+    { id: 60, name: 'Dr. Mohamed Benali', specialty: 'Pédiatrie', available: true, gender: 'male', location: 'Mila' }
+  ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -35,21 +66,9 @@ const All = () => {
     }
   }, [searchParams]);
 
-  // Fetch doctors from database
+  // Remove the API call and use static data
   useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/api/doctors');
-        setDoctors(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching doctors:', err);
-        setError('Failed to load doctors. Please try again later.');
-        setLoading(false);
-      }
-    };
-
-    fetchDoctors();
+    setLoading(false);
   }, []);
 
   // Save scroll position when filters change
@@ -81,17 +100,27 @@ const All = () => {
   
   // Location options
   const algerianCities = [
-    'All Locations',
-    'Algiers',
-    'Oran',
-    'Constantine',
-    'Annaba',
-    'Blida',
-    'Batna',
-    'Djelfa',
-    'Sétif',
-    'Sidi Bel Abbès',
-    'Biskra'
+  
+      'Algiers',
+      'Annaba',
+      'Batna',
+      'Blida',
+      'Béjaïa',
+      'Constantine',
+      'Djelfa',
+      'Guelma',
+      'Jijel',
+      "M'Sila",
+      'Mila',
+      'Médéa',
+      'Oran',
+      'Relizane',
+      'Sidi Bel Abbès',
+      'Skikda',
+      'Tizi Ouzou',
+      'Tlemcen'
+  
+    
   ];
 
   // Function to determine which image to show based on the doctor's name
@@ -125,10 +154,15 @@ const All = () => {
   
   // Filter doctors based on selection
   const filteredDoctors = doctors.filter(doctor => {
+    // For specialty filter
     const matchesSpecialty = selectedSpecialist === 'All Doctors' || 
-      doctor.specialization?.toLowerCase().includes(selectedSpecialist.toLowerCase());
+      doctor.specialty === selectedSpecialist;
+    
+    // For location filter
     const matchesLocation = selectedLocation === 'All Locations' || 
       doctor.location === selectedLocation;
+    
+    // Return true only if both conditions are met
     return matchesSpecialty && matchesLocation;
   });
 
@@ -188,8 +222,7 @@ const All = () => {
                       <div 
                         key={index} 
                         className={`dropdown-item ${selectedSpecialist === specialist ? 'selected' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
+                        onClick={() => {
                           setSelectedSpecialist(specialist);
                           setSpecialistDropdownOpen(false);
                         }}
@@ -218,8 +251,7 @@ const All = () => {
                       <div 
                         key={index} 
                         className={`dropdown-item ${selectedLocation === city ? 'selected' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
+                        onClick={() => {
                           setSelectedLocation(city);
                           setLocationDropdownOpen(false);
                         }}
@@ -236,37 +268,30 @@ const All = () => {
         
         <div className={`doctors-grid ${(selectedSpecialist !== 'All Doctors' || selectedLocation !== 'All Locations') ? 'filtered' : ''}`}>
           {filteredDoctors.length > 0 ? (
-            filteredDoctors.map(doctor => {
-              // Get the full name of the doctor for image determination
-              const fullName = doctor.firstName && doctor.lastName 
-                ? `${doctor.firstName} ${doctor.lastName}` 
-                : doctor.name || '';
-              
-              return (
-                <Link to="/Login" key={doctor.doctorID || doctor.id}>
-                  <div className="doctor-card" style={{ cursor: 'pointer' }}>
-                    <div className="doctor-image-container">
-                      <img 
-                        src={getDoctorImage(fullName)} 
-                        alt={`Dr. ${fullName}`}
-                        className="doctor-image" 
-                      />
-                    </div>
-                    <div className="doctor-info">
-                      <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
-                        <span className="availability-dot"></span>
-                        <span className="availability-text">
-                          {doctor.available ? 'Available' : 'Unavailable'}
-                        </span>
-                      </div>
-                      <h3 className="doctor-name">{doctor.firstName} {doctor.lastName || doctor.name}</h3>
-                      <p className="doctor-specialty">{doctor.specialization || doctor.specialty}</p>
-                      <p className="doctor-location">{doctor.location || "Algiers"}</p>
-                    </div>
+            filteredDoctors.map(doctor => (
+              <Link to="/Login" key={doctor.id}>
+                <div className="doctor-card" style={{ cursor: 'pointer' }}>
+                  <div className="doctor-image-container">
+                    <img 
+                      src={getDoctorImage(doctor.name)} 
+                      alt={`Dr. ${doctor.name}`}
+                      className="doctor-image" 
+                    />
                   </div>
-                </Link>
-              );
-            })
+                  <div className="doctor-info">
+                    <div className={`availability ${doctor.available ? 'available' : 'unavailable'}`}>
+                      <span className="availability-dot"></span>
+                      <span className="availability-text">
+                        {doctor.available ? 'Available' : 'Unavailable'}
+                      </span>
+                    </div>
+                    <h3 className="doctor-name">{doctor.name}</h3>
+                    <p className="doctor-specialty">{doctor.specialty}</p>
+                    <p className="doctor-location">{doctor.location}</p>
+                  </div>
+                </div>
+              </Link>
+            ))
           ) : (
             <div className="no-doctors-message">
               No doctors found matching your criteria.
