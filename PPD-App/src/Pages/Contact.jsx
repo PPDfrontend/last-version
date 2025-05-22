@@ -19,7 +19,7 @@ const Contact = () => {
           <h3 className="team-title">OUR TEAM</h3>
           
           <address className="address-info">
-            Rue 33 Nouvelle Ville<br />
+            Abdelhamid Mehri University<br />
             Constantine, Algeria
           </address>
           

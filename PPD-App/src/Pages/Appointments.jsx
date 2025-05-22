@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Appointments.css';
 import Header from "../Component/Header-home";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -31,9 +31,15 @@ const Appointments = () => {
   }, [appointments]);
 
   const handleUpdateAppointment = (id) => {
-    // Navigate to booking page for the specific doctor to update appointment
+    // Find the appointment
     const appointment = appointments.find(app => app.id === id);
     if (appointment) {
+      // Remove the appointment from the list
+      const updatedAppointments = appointments.filter(app => app.id !== id);
+      setAppointments(updatedAppointments);
+      // Update localStorage
+      localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+      // Navigate to booking page for the specific doctor
       navigate(`/Booking/${appointment.doctorId}`);
     }
   };

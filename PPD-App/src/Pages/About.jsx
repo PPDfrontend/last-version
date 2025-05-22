@@ -17,25 +17,18 @@ const About = () => {
           </div>
           
           <div className="about-text">
-            <p>
-              Welcome to Tabib, Your Trusted Partner In Managing Your Healthcare Needs Conveniently And Efficiently. At 
-              Tabib, We Understand The Challenges Individuals Face When It Comes To Scheduling Doctor Appointments In 
-              Algeria And Managing Their Health Records.
+          <p>
+              Welcome to Tabib, your trusted partner in managing your healthcare needs conveniently and efficiently. At Tabib, we understand the challenges individuals face when it comes to scheduling doctor appointments in Algeria and managing their health records.
             </p>
             
             <p>
-              Tabib Is Committed To Excellence In Healthcare Technology. We Continuously Strive To Enhance Our Platform, 
-              Integrating The Latest Advancements To Improve User Experience And Deliver Superior Service. Whether You're 
-              Booking Your First Appointment Or Managing Ongoing Care, Tabib Is Here To Support You Every Step Of The 
-              Journey.
+              Tabib is committed to excellence in healthcare technology. We continuously strive to enhance our platform, integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking your first appointment or managing ongoing care, Tabib is here to support you every step of the journey.
             </p>
             
             <div className="vision-section">
               <h3>Our Vision</h3>
               <p>
-                Our Vision At Tabib Is To Create A Seamless Healthcare Experience For Every User. We Aim To Bridge The Gap 
-                Between Patients And Healthcare Providers, Making It Easier For You To Access The Care You Need, When You 
-                Need It.
+              Our vision at Tabib is to create a seamless healthcare experience for every user. We aim to bridge the gap between patients and healthcare providers, making it easier for you to access the care you need, when you need it.
               </p>
             </div>
           </div>
@@ -48,17 +41,17 @@ const About = () => {
         <div className="benefits-container">
           <div className="benefit-card">
             <h3>EFFICIENCY:</h3>
-            <p>Streamlined Appointment Scheduling That Fits Into Your Busy Lifestyle.</p>
+            <p>Streamlined Appointment scheduling that fits into your busy lifestyle.</p>
           </div>
           
           <div className="benefit-card">
             <h3>CONVENIENCE:</h3>
-            <p>Access To A Network Of Trusted Healthcare Professionals In Your Area.</p>
+            <p>Access to a network of trusted healthcare professionals in your area.</p>
           </div>
           
           <div className="benefit-card">
             <h3>PERSONALIZATION:</h3>
-            <p>Tailored Recommendations And Reminders To Help You Stay On Top Of Your Health.</p>
+            <p>Tailored recommendations and reminders to help you stay on top of your health.</p>
           </div>
         </div>
       </div>

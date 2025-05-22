@@ -17,9 +17,6 @@ function Home2() {
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [showLocationOptions, setShowLocationOptions] = useState(false);
 
-  const [doctors, setDoctors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   
   const specialistDropdownRef = useRef(null);
   const locationDropdownRef = useRef(null);
@@ -62,6 +59,16 @@ function Home2() {
   'Tlemcen'
 ];
 
+  const doctors = [
+    { id: 31, name: 'Dr. Nassim Benkhaled', specialty: 'Cardiologie', available: true, gender: 'male', location: 'Algiers' },
+    { id: 32, name: 'Dr. Imane Zerrouki', specialty: 'Dermatologie', available: true, gender: 'female', location: 'Algiers' },
+    { id: 33, name: 'Dr. Khaled Bouchareb', specialty: 'Neurologie', available: true, gender: 'male', location: 'Algiers' },
+    { id: 34, name: 'Dr. Meriem Chaouch', specialty: 'Pédiatrie', available: true, gender: 'female', location: 'Algiers' },
+    { id: 35, name: 'Dr. Riad Saadi', specialty: 'Médecine Générale', available: true, gender: 'male', location: 'Algiers' },
+    { id: 36, name: 'Dr. Sara Gacem', specialty: 'Gynécologie-Obstétrique', available: true, gender: 'female', location: 'Algiers' },
+    { id: 37, name: 'Dr. Lina Harbi', specialty: 'Radiologie', available: true, gender: 'female', location: 'Algiers' },
+    { id: 38, name: 'Dr. Amine Bouabdellah', specialty: 'Radiologie', available: true, gender: 'male', location: 'Algiers' }
+  ];
 
   const getDoctorImage = (name) => {
     const lowerName = name.toLowerCase();
@@ -73,25 +80,6 @@ function Home2() {
     }
     return maleDoctorImage;
   };
-
-  useEffect(() => {
-    setFilteredSpecialists(specialists);
-    setFilteredLocations(locations);
-    
-    const fetchDoctors = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/api/doctors');
-        setDoctors(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching doctors:', err);
-        setError('Failed to load doctors. Please try again later.');
-        setLoading(false);
-      }
-    };
-
-    fetchDoctors();
-  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -129,10 +117,6 @@ function Home2() {
   };
 
   const navigate = useNavigate();
-
-  const handleBookAppointment = (doctorId) => {
-    navigate(`/book-appointment/${doctorId}`);
-  };
 
   return (
     <>
@@ -231,37 +215,30 @@ function Home2() {
         <section className="featured-doctors-section">
           <h2>Suggestion</h2>
           <p className="paragraph">Explore our list of trusted doctors and book your appointment free.</p>
-          {loading ? (
-            <div className="loading-message">Loading doctors...</div>
-          ) : error ? (
-            <div className="error-message">{error}</div>
-          ) : (
-            <div className="doctors-grid1">
-              {doctors.length > 0 ? (
-                doctors.slice(0, 8).map((doctor) => (
-                  <div key={doctor.id} className="doctor-card1">
-                    <img 
-                      src={getDoctorImage(doctor.name)} 
-                      alt={`Doctor ${doctor.name}`} 
-                      className="doctor-img" 
-                    />
-                    <h3>{doctor.name}</h3>
-                    <p>Specialty: {doctor.specialty}</p>
-                    <p>Location: {doctor.location}</p>
-                    <Link to= {`/doctor/${doctor.id}`} className="doctor-details-link">
-                    <button 
-                      className="book-doctor-btn"
-                      onClick={() => handleBookAppointment(doctor.id)}
-                    >
-                      Book Appointment
-                    </button></Link>
-                  </div>
-                ))
-              ) : (
-                <div className="no-doctors-message">No doctors available at the moment.</div>
-              )}
-            </div>
-          )}
+          <div className="doctors-grid1">
+            {doctors.length > 0 ? (
+              doctors.map((doctor) => (
+                <div key={doctor.id} className="doctor-card1">
+                  <img 
+                    src={getDoctorImage(doctor.name)} 
+                    alt={`Doctor ${doctor.name}`} 
+                    className="doctor-img" 
+                  />
+                  <h3>{doctor.name}</h3>
+                  <p>Specialty: {doctor.specialty}</p>
+                  <p>Location: {doctor.location}</p>
+                  <button 
+                    className="book-doctor-btn"
+                    onClick={() => navigate(`/Booking/${doctor.id}`)}
+                  >
+                    Book Appointment
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="no-doctors-message">No doctors available at the moment.</div>
+            )}
+          </div>
         </section>
 
         <footer className="footer">
