@@ -39,6 +39,7 @@
   }
   
   .about-text p {
+    font-size: 16px;
     margin-bottom: 20px;
     line-height: 1.6;
     color: #333;
