@@ -34,13 +34,8 @@ const Appointments = () => {
     // Find the appointment
     const appointment = appointments.find(app => app.id === id);
     if (appointment) {
-      // Remove the appointment from the list
-      const updatedAppointments = appointments.filter(app => app.id !== id);
-      setAppointments(updatedAppointments);
-      // Update localStorage
-      localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
-      // Navigate to booking page for the specific doctor
-      navigate(`/Booking/${appointment.doctorId}`);
+      // Navigate to Booking2 page for the specific doctor
+      navigate(`/Booking2/${appointment.doctorId}`);
     }
   };
 
@@ -119,7 +114,7 @@ const Appointments = () => {
                   <p className="doctor-specialty">{appointment.specialty}</p>
                   <p className="appointment-address">
                     <strong>Address:</strong>
-                    <span>{appointment.address}</span>
+                    <span>{appointment.doctorAddress}</span>
                   </p>
                   <p className="appointment-date">
                     <strong>Date & Time:</strong>

@@ -4,6 +4,8 @@
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  position: relative;
+  top: 20px;
 }
 
 /* Success Message */
@@ -79,32 +81,37 @@
 }
 
 .about-section {
-  margin-bottom: 15px;
+  margin: 20px 0;
+  padding: 15px;
+  
+  border-radius: 8px;
+  position: relative;
+  right: 16px;
 }
 
 .about-header {
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin-bottom: 5px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .about-header h3 {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
+  color: #333;
+  font-size: 18px;
 }
 
 .info-icon {
-  color: #999;
-  font-size: 14px;
+  color: #00A3A3;
+  font-size: 16px;
 }
 
-.about-section p {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #666;
+.about-text {
   margin: 0;
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
 }
 
 .location {
@@ -177,12 +184,32 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .time-slot.selected {
   background-color: #00A3A3;
   color: white;
   border-color: #00A3A3;
+}
+
+.time-slot.booked {
+  background-color: #ffebee;
+  border-color: #ffcdd2;
+  color: #c62828;
+  cursor: not-allowed;
+}
+
+.booked-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #c62828;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
 }
 
 .book-button {
@@ -206,6 +233,11 @@
 
 .book-button:hover {
   background-color: #0097a7;
+}
+
+.book-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .footer3 {

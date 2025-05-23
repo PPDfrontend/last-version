@@ -1,5 +1,5 @@
 import React from 'react';
-import contact_image from '../assets/contact_image.png';
+import contact_image from '../assets/contact.jpg';
 import './Contact.css';
 import Header from '../Component/Header';
 

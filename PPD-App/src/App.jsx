@@ -13,6 +13,7 @@ import Contact from './Pages/Contact';
 import Contact2 from './Pages/Contact2';
 import MyAcc from './Pages/MyAcc';
 import Appointments from './Pages/Appointments';
+import Booking2 from './Pages/Booking2';
 
 function App() {
   return(
@@ -30,6 +31,7 @@ function App() {
         <Route path="/Appointments" element={<Appointments />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/Booking2/:doctorId" element={<Booking2 />} />
         <Route path="/Booking/:doctorId" element={<Booking />} />
       </Routes>
     </Router>

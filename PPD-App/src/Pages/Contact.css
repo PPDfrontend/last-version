@@ -1,133 +1,134 @@
 .contact-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    margin-top: 145px;
-  }
-  
-  .contact-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 40px;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
-  
-  .highlight {
-    color: #00A3A3;
-  }
-  
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 125px;
+}
+
+.contact-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.highlight {
+  color: #00A3A3;
+}
+
+.contact-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.contact-image {
+  flex: 0 0 45%;
+}
+
+.contact-image img {
+  position: relative;
+  top: 14px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+  flex: 0 0 45%;
+  padding: 10px 0;
+}
+
+.team-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.address-info {
+  font-style: normal;
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.contact-details {
+  margin-bottom: 20px;
+}
+
+.tel, .email {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.learn-more {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.explore-button {
+  padding: 10px 30px;
+  background-color: transparent;
+  border: 1px solid #333;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .contact-content {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
+    flex-direction: column;
+  }
+  
+  .contact-image, .contact-info {
+    flex: 0 0 100%;
   }
   
   .contact-image {
-    flex: 0 0 45%;
+    margin-bottom: 30px;
   }
-  
-  .contact-image img {
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-info {
-    flex: 0 0 45%;
-    padding: 10px 0;
-  }
-  
-  .team-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .address-info {
-    font-style: normal;
-    margin-bottom: 15px;
-    line-height: 1.6;
-    color: #555;
-  }
-  
-  .contact-details {
-    margin-bottom: 20px;
-  }
-  
-  .tel, .email {
-    margin-bottom: 8px;
-    color: #555;
-  }
-  
-  .learn-more {
-    margin-bottom: 20px;
-    color: #555;
-  }
-  
-  .explore-button {
-    padding: 10px 30px;
-    background-color: transparent;
-    border: 1px solid #333;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-  }
-  
-  .explore-button:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .contact-content {
-      flex-direction: column;
-    }
-    
-    .contact-image, .contact-info {
-      flex: 0 0 100%;
-    }
-    
-    .contact-image {
-      margin-bottom: 30px;
-    }
-  }
+}
 
-   
+ 
 .footer5 {
-    background-color: #f3fafa;
-    text-align: center;
-    padding: 5px;
-    color: #666;
-    font-size: 14px;
-    border-top: 1px solid #e0e0e0;
-    font-family: Arial, sans-serif;
-    margin-top: 81px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 39px;
-  }
-  
-  .footer-content5 {
-    height: 34px;
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-    bottom: 10px;
-  }
-  
-  .copyright5 {
-    color: #666;
-    font-size: 14px;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    position: relative;
-    top: 18px; 
-  }
-  
+  background-color: #f3fafa;
+  text-align: center;
+  padding: 5px;
+  color: #666;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+  font-family: Arial, sans-serif;
+  margin-top: 81px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 39px;
+}
+
+.footer-content5 {
+  height: 34px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  bottom: 10px;
+}
+
+.copyright5 {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  top: 18px; 
+}
